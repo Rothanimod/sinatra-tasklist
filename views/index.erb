@@ -1,0 +1,23 @@
+<% if !@items.empty? %>
+  <ul id="todo-list" class="unstyled">
+    <% @items.each do |item| %>
+      <li id="<%= item["id"] %>">
+        <span class="item">
+          <%= item["done"] ? "Tarea completada! : #{item['title']}" : item["title"] %>
+        </span>
+          <span class="pull-right">
+            <form action="/<%= item["id"] %>" method="post">
+              <input type="hidden" name="_method" value="PUT"></input>
+              <button type="submit"  class="btn btn-primary" value="Editar Tarea"><%= item["done"] ? "Finalizada!" : "Completar"%></button>
+              <a href="/delete/<%= item["id"] %>" class="btn btn-danger">Eliminar</a>
+            </form>
+          </span>
+      </li>
+    <% end %>
+  </ul>
+<%else%>
+  <h3> No existen Tareas con el criterio especificado. </h3>
+<%end%>
+
+
+<a href="/new" class="btn btn-primary">Crear Tarea</a>
